@@ -5,14 +5,14 @@
       <table>
         <thead>
         <tr>
-          <td id="example-1" v-for="column in columns">
+          <td v-for="column in columns" :title="column.label" :key="column.field">
               {{ column.field }}
           </td>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="row in rows">
-          <td id="example-2" v-for="col in row">
+        <tr v-for="(row, index) in rows" :key="index">
+          <td v-for="col in row" :key="col">
             {{ col}}
           </td>
         </tr>
