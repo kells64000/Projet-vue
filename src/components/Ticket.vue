@@ -22,7 +22,11 @@
         </tr>
         </tbody>
       </table>
-      debug: sort={{currentSort}}, dir={{currentSortWay}}
+      <p>
+        <button @click="prev">Previous page</button>
+        <button @click="next">Next page</button>
+      </p>
+
     </div>
   </div>
 
@@ -85,7 +89,9 @@ export default {
       columns: headers,
       rows: list,
       currentSort: list.ticket,
-      currentSortWay: 'asc'
+      currentSortWay: 'asc',
+      page: 1,
+      pageSize: 5
     }
   },
   methods: {
@@ -94,6 +100,12 @@ export default {
         this.currentSortWay = this.currentSortWay === 'asc' ? 'desc' : 'asc'
       }
       this.currentSort = s
+    },
+    next: function () {
+      if (this.page * this.pageSize < this.rows.length) this.page++
+    },
+    prev: function () {
+      if (this.page > 1) this.page--
     }
   },
   computed: {
@@ -108,6 +120,10 @@ export default {
           return 1 * way
         }
         return 0
+      }).filter((row, index) => {
+        let first = (this.page - 1) * this.pageSize
+        let end = this.page * this.pageSize
+        if (index >= first && index < end) return true
       })
     }
   }
