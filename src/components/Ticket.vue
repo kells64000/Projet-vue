@@ -2,10 +2,21 @@
   <div>
     <h2>{{msg}}</h2>
     <tr>
-      <div><span style="font-weight: bold">What are you looking for?</span>
-        <input v-model="rechercher" placeholder="Searching ..." type="text">
+      <div>
+          <div id="leftsearch">
+          <label>Filter by :</label>
+            <select v-model="colonne">
+              <option value ="demandeur">Demandeur</option>
+              <option value ="objet">Objet</option>
+              <option value ="detail">Detail</option>
+              <option value ="date">Date</option>
+            </select>
+          </div>
+        <div id="rightsearch">
+          <label style="font-weight: bold">What are you looking for?</label>
+          <input v-model="rechercher" placeholder="Searching ..." type="text">
+        </div>
       </div>
-
     </tr>
     <div>
       <table class="table">
@@ -17,7 +28,7 @@
         <tbody>
         <tr v-for="(row, index) in sortedRows" :key="index">
           <td v-for="col in row" :key="col">
-            {{ col}}
+            {{ col }}
           </td>
         </tr>
         </tbody>
@@ -91,7 +102,9 @@ export default {
       currentSort: list.ticket,
       currentSortWay: 'asc',
       page: 1,
-      pageSize: 5
+      pageSize: 5,
+      rechercher: '',
+      colonne: ''
     }
   },
   methods: {
@@ -108,9 +121,11 @@ export default {
       if (this.page > 1) this.page--
     }
   },
+
   computed: {
     sortedRows: function () {
-      return this.rows.sort((a, b) => {
+      var self = this
+      return self.filteredRows.sort((a, b) => {
         let way = 1
         if (this.currentSortWay === 'desc') way = -1
         if (a[this.currentSort] < b[this.currentSort]) {
@@ -120,11 +135,33 @@ export default {
           return 1 * way
         }
         return 0
-      }).filter((row, index) => {
-        let first = (this.page - 1) * this.pageSize
-        let end = this.page * this.pageSize
-        if (index >= first && index < end) return true
       })
+        .filter((row, index) => {
+          // first of the page
+          let first = (this.page - 1) * this.pageSize
+          // last of the page
+          let end = this.page * this.pageSize
+          // show if true
+          if (index >= first && index < end) return true
+        })
+    },
+    filteredRows: function () {
+      let rows = this.rows
+      if (this.rechercher) {
+        rows = rows.filter((a) => {
+          switch (this.colonne) {
+            case 'date':
+              return a.date.indexOf(this.rechercher) !== -1
+            case 'demandeur':
+              return a.demandeur.indexOf(this.rechercher) !== -1
+            case 'objet':
+              return a.objet.indexOf(this.rechercher) !== -1
+            case 'detail':
+              return a.detail.indexOf(this.rechercher) !== -1
+          }
+        })
+      }
+      return rows
     }
   }
 }
