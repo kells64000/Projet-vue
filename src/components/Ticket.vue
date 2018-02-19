@@ -6,15 +6,16 @@
           <div id="leftsearch">
           <label>Filter by :</label>
             <select v-model="colonne">
-              <option value ="demandeur">Demandeur</option>
-              <option value ="objet">Objet</option>
-              <option value ="detail">Detail</option>
-              <option value ="date">Date</option>
+              <option value ="demandeur" @click="showChoice = true">Demandeur</option>
+              <option value ="objet" @click="showChoice = true">Objet</option>
+              <option value ="detail" @click="showChoice = true">Detail</option>
+              <option value ="date" @click="showChoice = true">Date</option>
+              <option value ="" @click="showChoice = false"></option>
             </select>
           </div>
         <div id="rightsearch">
-          <label style="font-weight: bold">What are you looking for?</label>
-          <input v-model="rechercher" placeholder="Searching ..." type="text">
+          <label style="font-weight: bold" v-show=showChoice>What are you looking for?</label>
+          <input v-model="rechercher" placeholder="Searching ..." type="text" v-show=showChoice>
         </div>
       </div>
     </tr>
@@ -104,7 +105,8 @@ export default {
       page: 1,
       pageSize: 5,
       rechercher: '',
-      colonne: ''
+      colonne: '',
+      showChoice: false
     }
   },
   methods: {

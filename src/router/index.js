@@ -10,6 +10,7 @@ Vue.filter('searchBy', function (objects, key) {
 })
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
