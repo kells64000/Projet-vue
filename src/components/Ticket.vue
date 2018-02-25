@@ -10,6 +10,8 @@
               <option value ="objet" @click="showFilter = true">Objet</option>
               <option value ="detail" @click="showFilter = true">Detail</option>
               <option value ="date" @click="showFilter = true">Date</option>
+              <option value ="tech" @click="showFilter = true">Tech</option>
+              <option value ="etat" @click="showFilter = true">Etat</option>
               <option value ="" @click="showFilter = false"></option>
             </select>
           </div>
@@ -58,28 +60,31 @@
 
 <script>
 var list = [
-  {
-    ticket: 1,
-    date: '24-11-2017',
-    demandeur: 'Tom',
-    objet: 'objet',
-    detail: 'detail operation to try new things et to say bla bla bla bla'
-  },
-  {ticket: 2, date: '24-11-2017', demandeur: 'Jean', objet: 'objet', detail: 'detail operation'},
-  {ticket: 3, date: '24-11-2017', demandeur: 'Marie', objet: 'objet', detail: 'detail operation'},
-  {ticket: 4, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation'},
-  {ticket: 5, date: '24-11-2017', demandeur: 'Jean', objet: 'objet', detail: 'detail operation'},
-  {ticket: 6, date: '24-11-2017', demandeur: 'Marie', objet: 'objet', detail: 'detail operation'},
-  {ticket: 7, date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation'},
-  {ticket: 8, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation'},
-  {ticket: 9, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation'},
-  {ticket: 10, date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation'}
+  {ticket: 2, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 1, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation to try new things et to say bla bla bla bla'},
+  {ticket: 3, etat: 'open', tech: 'Omer', date: '24-11-2017', demandeur: 'Marie', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 4, etat: 'open', tech: 'Bart', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 5, etat: 'open', tech: 'Maggie', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 6, etat: 'open', tech: 'Casimir', date: '24-11-2017', demandeur: 'Marie', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 7, etat: 'open', tech: 'Casimir', date: '24-11-2017', demandeur: 'Tom', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 8, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 9, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 10, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Tom', objet: 'résumé', detail: 'detail operation'}
 ]
 var headers = [
   {
     label: 'Ticket',
     field: 'ticket',
     type: 'number'
+  },
+  {
+    label: 'Etat',
+    field: 'etat',
+    type: 'checkbox'
+  },
+  {
+    label: 'Affecté',
+    field: 'tech'
   },
   {
     label: 'Date',
@@ -129,14 +134,16 @@ export default {
     },
     next: function () {
       if (this.page * this.pageSize < this.rows.length) this.page++
+      this.rowActive = ''
     },
     prev: function () {
       if (this.page > 1) this.page--
+      this.rowActive = ''
     },
     setActive: function (row, index) {
       this.rowActive = index
       if (row && this.rowActive !== '') { this.isActive = !this.isActive }
-      console.log(JSON.stringify(this.rowActive))
+      /* console.log(JSON.stringify(this.rowActive)) */
     }
   },
 
@@ -168,8 +175,12 @@ export default {
       if (this.rechercher) {
         rows = rows.filter((a) => {
           switch (this.colonne) {
+            case 'etat':
+              return a.etat.indexOf(this.rechercher) !== -1
             case 'date':
               return a.date.indexOf(this.rechercher) !== -1
+            case 'tech':
+              return a.tech.indexOf(this.rechercher) !== -1
             case 'demandeur':
               return a.demandeur.indexOf(this.rechercher) !== -1
             case 'objet':
