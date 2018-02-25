@@ -134,6 +134,15 @@ table tr td {
 table tr:first-child td {
   border-top: none;
 }
+table tr:hover td {
+  background-color: #FBE7E7;
+}
+
+table tr.active td {
+  -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
+}
+
 
 /* Table Cells */
 table td {

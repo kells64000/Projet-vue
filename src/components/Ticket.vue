@@ -31,10 +31,18 @@
         </thead>
         <tbody>
         <tr v-for="(row, index) in sortedRows"
-            :key="index">
+            :key="index"
+            :class="{active: (index == rowActive && rowActive !== '' ? isActive = true : isActive = false )}">
           <td v-for="(cell, index2) in row"
-              :key="index2">
-            {{ index2 !== 'detail' ? cell : ''}}
+              :key="index2"
+              @click="setActive(row, index)">
+            <span v-if="index2 !== 'detail' || index == rowActive && rowActive !== ''" v-show="showDetail==false">
+            {{ cell }}
+            </span>
+            <span v-else v-show="showDetail==true">
+            {{ cell }}
+            </span>
+            <!--{{ index2 !== 'detail' ? cell : ''}}-->
           </td>
         </tr>
         </tbody>
@@ -71,30 +79,26 @@ var headers = [
   {
     label: 'Ticket',
     field: 'ticket',
-    filterable: true,
     type: 'number'
   },
   {
     label: 'Date',
     field: 'date',
     type: 'date',
-    inputFormat: 'DDMMYYYY',
-    filterable: true
+    inputFormat: 'DDMMYYYY'
   },
   {
     label: 'Demandeur',
-    field: 'demandeur',
-    filterable: true
+    field: 'demandeur'
   },
   {
     label: 'Objet',
-    field: 'objet',
-    filterable: true
+    field: 'objet'
   },
   {
     label: 'Detail',
     field: 'detail',
-    filterable: true
+    showDetail: false
   }
 ]
 
@@ -111,7 +115,9 @@ export default {
       rechercher: '',
       colonne: '',
       showFilter: false,
-      showDetail: true
+      showDetail: false,
+      isActive: false,
+      rowActive: ''
     }
   },
   methods: {
@@ -126,6 +132,11 @@ export default {
     },
     prev: function () {
       if (this.page > 1) this.page--
+    },
+    setActive: function (row, index) {
+      this.rowActive = index
+      if (row && this.rowActive !== '') { this.isActive = !this.isActive }
+      console.log(JSON.stringify(this.rowActive))
     }
   },
 
