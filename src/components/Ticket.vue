@@ -6,30 +6,35 @@
           <div id="leftsearch">
           <label>Filter by :</label>
             <select v-model="colonne">
-              <option value ="demandeur" @click="showChoice = true">Demandeur</option>
-              <option value ="objet" @click="showChoice = true">Objet</option>
-              <option value ="detail" @click="showChoice = true">Detail</option>
-              <option value ="date" @click="showChoice = true">Date</option>
-              <option value ="" @click="showChoice = false"></option>
+              <option value ="demandeur" @click="showFilter = true">Demandeur</option>
+              <option value ="objet" @click="showFilter = true">Objet</option>
+              <option value ="detail" @click="showFilter = true">Detail</option>
+              <option value ="date" @click="showFilter = true">Date</option>
+              <option value ="" @click="showFilter = false"></option>
             </select>
           </div>
         <div id="rightsearch">
-          <label style="font-weight: bold" v-show=showChoice>What are you looking for?</label>
-          <input v-model="rechercher" placeholder="Searching ..." type="text" v-show=showChoice>
+          <label style="font-weight: bold" v-show=showFilter>What are you looking for?</label>
+          <input v-model="rechercher" placeholder="Searching ..." type="text" v-show=showFilter>
         </div>
       </div>
     </tr>
     <div>
       <table class="table">
         <thead>
-        <th v-for="column in columns" :title="column.label" :key="column.field" @click="sort(column.field)">
+        <th v-for="column in columns"
+            :title="column.label"
+            :key="column.field"
+            @click="sort(column.field)">
           {{ column.label }}
         </th>
         </thead>
         <tbody>
-        <tr v-for="(row, index) in sortedRows" :key="index">
-          <td v-for="col in row" :key="col">
-            {{ col }}
+        <tr v-for="(row, index) in sortedRows"
+            :key="index">
+          <td v-for="(cell, index2) in row"
+              :key="index2">
+            {{ index2 !== 'detail' ? cell : ''}}
           </td>
         </tr>
         </tbody>
@@ -38,8 +43,7 @@
         <button @click="prev">Previous page</button>
         <button @click="next">Next page</button>
       </p>
-
-    </div>
+      </div>
   </div>
 
 </template>
@@ -106,7 +110,8 @@ export default {
       pageSize: 5,
       rechercher: '',
       colonne: '',
-      showChoice: false
+      showFilter: false,
+      showDetail: true
     }
   },
   methods: {
