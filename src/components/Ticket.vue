@@ -3,7 +3,13 @@
     <h2>{{msg}}</h2>
     <tr>
       <div>
-          <div id="leftsearch">
+        <button type="button" class="btn" @click="showModal">
+          Ajouter
+        </button>
+        <modal v-show="isModalVisible" @close="hideModal"/>
+      </div>
+      <div>
+        <div id="leftsearch">
           <label>Filter by :</label>
             <select v-model="colonne">
               <option value ="demandeur" @click="showFilter = true">Demandeur</option>
@@ -59,6 +65,8 @@
 </template>
 
 <script>
+import modal from './Modal'
+
 var list = [
   {ticket: 2, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
   {ticket: 1, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation to try new things et to say bla bla bla bla'},
@@ -108,6 +116,9 @@ var headers = [
 ]
 
 export default {
+  components: {
+    modal
+  },
   data () {
     return {
       msg: 'Ticketing App',
@@ -122,7 +133,8 @@ export default {
       showFilter: false,
       showDetail: false,
       isActive: false,
-      rowActive: ''
+      rowActive: '',
+      isModalVisible: false
     }
   },
   methods: {
@@ -144,6 +156,12 @@ export default {
       this.rowActive = index
       if (row && this.rowActive !== '') { this.isActive = !this.isActive }
       /* console.log(JSON.stringify(this.rowActive)) */
+    },
+    showModal: function () {
+      this.isModalVisible = true
+    },
+    hideModal: function () {
+      this.isModalVisible = false
     }
   },
 
