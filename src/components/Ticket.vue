@@ -83,6 +83,7 @@ var headers = [
 ]
 
 export default {
+  name: 'Ticket',
   data () {
     return {
       msg: 'Ticketing App',
