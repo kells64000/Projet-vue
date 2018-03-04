@@ -12,7 +12,11 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-3">
           <div class="button-user">
-            <i class="fa fa-plus-square fa-3x"></i>
+            <button type="button" class="btn btn-add" @click="showModal">
+              <i class="fa fa-plus-square fa-2x"></i>
+            </button>
+            <modal v-show="isModalVisible" @close="closeModal" />
+
             <input v-model="rechercher" placeholder="Search ..." type="text">
           </div>
         </div>
@@ -59,28 +63,11 @@
     </div>
   </div>
 </template>
-<!--!!! RESPONSIVE !!!! -->
-<!-- SM -->
-<!--        <div class="table-responsive-sm">
-          <table class="table">
-            ...
-          </table>
-        </div>
-    /* MD */
-        <div class="table-responsive-md">
-          <table class="table">
-            ...
-          </table>
-        </div>
-    /* LG */
-        <div class="table-responsive-lg">
-          <table class="table">
-            ...
-          </table>
-        </div>-->
 
 <script>
 /* eslint-disable vue/no-side-effects-in-computed-properties */
+
+// import modal from './Modal.vue'
 
 var list = [
   {
