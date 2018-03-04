@@ -17,7 +17,7 @@
         <tbody>
         <tr v-for="(row, index) in sortedRows" :key="index">
           <td v-for="col in row" :key="col">
-            {{ col}}
+            {{ col }}
           </td>
         </tr>
         </tbody>
