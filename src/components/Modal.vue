@@ -17,6 +17,9 @@
 
 export default {
   name: 'Modal',
+  components: {
+    Modal
+  },
   data () {
     return {
       isModalVisible: false

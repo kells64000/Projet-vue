@@ -9,8 +9,8 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-3">
+        <div class="col-lg-2 col-sm-1"></div>
+        <div class="col-lg-3 col-sm-3">
           <div class="button-user">
             <button type="button" class="btn btn-add" @click="showModal">
               <i class="fa fa-plus-square fa-2x"></i>
@@ -20,7 +20,7 @@
             <input v-model="rechercher" placeholder="Search ..." type="text">
           </div>
         </div>
-        <div class="col-lg-7"></div>
+        <div class="col-lg-7 col-sm-8"></div>
       </div>
 
       <div class="row">
@@ -66,8 +66,6 @@
 
 <script>
 /* eslint-disable vue/no-side-effects-in-computed-properties */
-
-// import modal from './Modal.vue'
 
 var list = [
   {
