@@ -216,3 +216,12 @@ button:hover {
   box-shadow: 0px 0px 0px 1px transparent inset, 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
   color: rgba(0, 0, 0, 0.8);
 }
+
+.button-user{
+  display: inline-flex;
+}
+
+.fa-plus-square{
+  width: 80px;
+  color: #0A6E8F;
+}
