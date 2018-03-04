@@ -1,62 +1,109 @@
 <template>
-  <div>
-    <h2>{{msg}}</h2>
-    <tr>
-      <div><span style="font-weight: bold">What are you looking for?</span>
-        <input v-model="rechercher" placeholder="Searching ..." type="text">
+  <div class="app">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-lg-12">
+        <h2>{{msg}}</h2>
+        </div>
       </div>
 
-    </tr>
-    <div>
-      <table class="table">
-        <thead>
-        <th v-for="column in columns" :title="column.label" :key="column.field" @click="sort(column.field)">
-          {{ column.label }}
-        </th>
-        </thead>
-        <tbody>
-        <tr v-for="(row, index) in sortedRows" :key="index">
-          <td v-for="col in row" :key="col">
-            {{ col}}
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <p>
-        <button @click="prev">Previous page</button>
-        <button @click="next">Next page</button>
-      </p>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div class="table-responsive-xl">
+                <table class="table table-bordered">
+                  <thead>
+                    <th v-for="column in columns" :title="column.label" :key="column.field" @click="sort(column.field)">
+                      {{ column.label }}
+                      <!--<i class="fas fa-sort-up"></i>-->
+                      <!--<i class="fas fa-sort-down"></i>-->
+                   </th>
+                  </thead>
+                  <tbody>
+                <tr v-for="(row, index) in sortedRows" :key="index">
+                    <td v-for="col in row" :key="col">
+                     {{ col}}
+                    </td>
+                  </tr>
+                <!--<i class="fas fa-edit"></i>-->
+                <!--<i class="fas fa-trash"></i>-->
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <p>
+          <button @click="prev">Previous page</button>
+          <button @click="next">Next page</button>
+          </p>
+        </div>
+      </div>
 
     </div>
   </div>
-
 </template>
 
+<!-- !!!! Recherche !!!! -->
+<!--<tr>-->
+<!--<div><span style="font-weight: bold">What are you looking for?</span>-->
+<!--<input v-model="rechercher" placeholder="Searching ..." type="text">-->
+<!--</div>-->
+<!--</tr>-->
+
+<!--!!! RESPONSIVE !!!! -->
+<!-- SM -->
+<!--        <div class="table-responsive-sm">
+          <table class="table">
+            ...
+          </table>
+        </div>
+    /* MD */
+        <div class="table-responsive-md">
+          <table class="table">
+            ...
+          </table>
+        </div>
+    /* LG */
+        <div class="table-responsive-lg">
+          <table class="table">
+            ...
+          </table>
+        </div>-->
+<!-- XL -->
+
 <script>
+/* eslint-disable vue/no-side-effects-in-computed-properties */
+
 var list = [
   {
     ticket: 1,
     date: '24-11-2017',
     demandeur: 'Tom',
     objet: 'objet',
-    detail: 'detail operation to try new things et to say bla bla bla bla'
+    detail: 'detail operation to try new things et to say bla bla bla bla',
+    crud: 'Edit / Delete'
   },
-  {ticket: 2, date: '24-11-2017', demandeur: 'Jean', objet: 'objet', detail: 'detail operation'},
-  {ticket: 3, date: '24-11-2017', demandeur: 'Marie', objet: 'objet', detail: 'detail operation'},
-  {ticket: 4, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation'},
-  {ticket: 5, date: '24-11-2017', demandeur: 'Jean', objet: 'objet', detail: 'detail operation'},
-  {ticket: 6, date: '24-11-2017', demandeur: 'Marie', objet: 'objet', detail: 'detail operation'},
-  {ticket: 7, date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation'},
-  {ticket: 8, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation'},
-  {ticket: 9, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation'},
-  {ticket: 10, date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation'}
+  {ticket: 2, date: '24-11-2017', demandeur: 'Jean', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 3, date: '24-11-2017', demandeur: 'Marie', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 4, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 5, date: '24-11-2017', demandeur: 'Jean', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 6, date: '24-11-2017', demandeur: 'Marie', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 7, date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 8, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 9, date: '24-11-2017', demandeur: 'Chris', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'},
+  {ticket: 10, date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation', crud: 'Edit / Delete'}
 ]
 var headers = [
   {
     label: 'Ticket',
     field: 'ticket',
-    filterable: true,
-    type: 'number'
+    type: 'number',
+    filterable: true
   },
   {
     label: 'Date',
@@ -79,6 +126,10 @@ var headers = [
     label: 'Detail',
     field: 'detail',
     filterable: true
+  },
+  {
+    label: 'CRUD',
+    field: 'crud'
   }
 ]
 
