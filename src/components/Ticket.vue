@@ -41,6 +41,9 @@
         <tr v-for="(row, index) in sortedRows"
             :key="index"
             :class="{active: (index == rowActive && rowActive !== '' ? isActive = true : isActive = false )}">
+          <td>
+            <span><button @click="delInter(item)">x</button>
+            </span></td>
           <td v-for="(cell, index2) in row"
               :key="index2"
               @click="setActive(row, index)">
@@ -80,6 +83,10 @@ var list = [
   {ticket: 10, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Tom', objet: 'résumé', detail: 'detail operation'}
 ]
 var headers = [
+  {
+    label: 'Supprimer',
+    field: 'supprimer'
+  },
   {
     label: 'Ticket',
     field: 'ticket',
@@ -189,7 +196,7 @@ export default {
         })
     },
     filteredRows: function () {
-      let rows = this.rows
+      let rows = this.$store.state.items
       if (this.rechercher) {
         rows = rows.filter((a) => {
           switch (this.colonne) {
