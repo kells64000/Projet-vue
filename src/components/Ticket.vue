@@ -53,7 +53,7 @@
             <span v-if="index2 !== 'detail' || index == rowActive && rowActive !== ''" v-show="showDetail==false && editedTodo != (i+j)">
             {{ cell }}
             </span>
-            <input  v-if = "editedTodo == (i+'_'+j) && editedValue == cell" v-model = "editedValue" v-focus="true"
+            <input  v-if = "editedTodo == (i+'_'+j) && editedValue == cell  && isActive == true" v-model = "editedValue" v-focus = true
                     v-on:blur= "edit(i,j); $emit('update')"
                     @keyup.enter = "edit(i,j); $emit('update')">
             <span v-else v-show="showDetail==true">
@@ -149,7 +149,8 @@ export default {
       isActive: false,
       rowActive: '',
       isModalVisible: false,
-      editedTodo: null
+      editedTodo: null,
+      editedValue: ''
     }
   },
   methods: {
@@ -177,9 +178,6 @@ export default {
     },
     hideModal: function () {
       this.isModalVisible = false
-    },
-    edit: function (td) {
-      this.editedTodo = td
     }
   },
   computed: {

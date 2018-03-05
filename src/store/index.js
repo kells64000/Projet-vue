@@ -25,6 +25,14 @@ const mutations = {
       inter
     )
   },
+  [types.editValue] (state, payload) {
+    payload.ticket = state.lastTicket++
+    console.log(Object.values(payload))
+    let inter = payload
+    state.items.push(
+      inter
+    )
+  },
   [types.delInter] (state, payload) {
     let inter = payload
     state.items.pop(
