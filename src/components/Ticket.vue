@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <div>
     <h2>{{msg}}</h2>
@@ -47,10 +48,14 @@
             </span></td>
           <td v-for="(cell, index2) in row"
               :key="index2"
-              @click="setActive(row, index)">
-            <span v-if="index2 !== 'detail' || index == rowActive && rowActive !== ''" v-show="showDetail==false">
+              @click="setActive(row, index)"
+              @dblclick="editedTodo = (i+'_'+j);editedValue=cell">
+            <span v-if="index2 !== 'detail' || index == rowActive && rowActive !== ''" v-show="showDetail==false && editedTodo != (i+j)">
             {{ cell }}
             </span>
+            <input  v-if = "editedTodo == (i+'_'+j) && editedValue == cell" v-model = "editedValue" v-focus="true"
+                    v-on:blur= "edit(i,j); $emit('update')"
+                    @keyup.enter = "edit(i,j); $emit('update')">
             <span v-else v-show="showDetail==true">
             {{ cell }}
             </span>
@@ -59,6 +64,7 @@
         </tr>
         </tbody>
       </table>
+
       <p>
         <button @click="prev">Previous page</button>
         <button @click="next">Next page</button>
@@ -142,7 +148,8 @@ export default {
       showDetail: false,
       isActive: false,
       rowActive: '',
-      isModalVisible: false
+      isModalVisible: false,
+      editedTodo: null
     }
   },
   methods: {
@@ -170,9 +177,11 @@ export default {
     },
     hideModal: function () {
       this.isModalVisible = false
+    },
+    edit: function (td) {
+      this.editedTodo = td
     }
   },
-
   computed: {
     sortedRows: function () {
       var self = this
