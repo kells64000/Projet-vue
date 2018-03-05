@@ -109,7 +109,7 @@ table thead th {
   text-align: inherit;
   color: #FFF;
   padding: 0.92857143em 0.78571429em;
-  vertical-align: inherit;
+  vertical-align: middle !important;
   font-style: none;
   font-weight: bold;
   text-transform: none;
@@ -130,8 +130,9 @@ table thead tr:first-child > th:only-child {
 }
 
 /* Table Row */
-table tr td {
+.table td, .table th {
   border-top: 1px solid rgba(34, 36, 38, 0.1);
+  vertical-align: center !important;
 }
 table tr:first-child td {
   border-top: none;
@@ -349,10 +350,21 @@ checkbox label:after {
   transition: border 0.1s ease, opacity 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
 }
 
+.checkbox{
+  background-color: transparent;
+}
+.checkbox:hover{
+  background-color: red;
+}
+.checkbox:active, .checkbox:focus{
+  background-color: green !important;
+}
+
+
 select {
   display: block;
   height: auto;
-  width: 40%;
+  width: 80%;
   background: #FFFFFF;
   border: 1px solid rgba(34, 36, 38, 0.15);
   border-radius: 0.28571429rem;
@@ -369,27 +381,17 @@ select {
 
 #leftsearch {
   float: left;
+  padding-bottom: 30px;
 }
 
 #rightsearch {
   float: right;
+  padding-left: 40px;
 }
 
-.btn-add{
-  background-color: #FFF;
-}
-.btn-add:hover, :active, :focus{
-  background-color: #FFF;
-  box-shadow: 0 0 0 .2rem #FFF !important;
-}
-
-.button-user{
-  display: inline-flex;
-}
-
-.fa-plus-square{
-  width: 80px;
-  color: #0A6E8F;
+.btn-center{
+  display: flex;
+  justify-content: center;
 }
 
 .modal-backdrop {

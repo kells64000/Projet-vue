@@ -6,13 +6,12 @@
         <div id="leftsearch">
           <label>Filter by :</label>
           <select v-model="colonne">
-            <option value ="demandeur" @click="showFilter = true">Demandeur</option>
-            <option value ="objet" @click="showFilter = true">Objet</option>
-            <option value ="detail" @click="showFilter = true">Detail</option>
-            <option value ="date" @click="showFilter = true">Date</option>
-            <option value ="tech" @click="showFilter = true">Tech</option>
-            <option value ="etat" @click="showFilter = true">Etat</option>
-            <option value ="" @click="showFilter = false"></option>
+            <option value="demandeur" @click="showFilter = true">Demandeur</option>
+            <option value="objet" @click="showFilter = true">Objet</option>
+            <option value="detail" @click="showFilter = true">Detail</option>
+            <option value="date" @click="showFilter = true">Date</option>
+            <option value="tech" @click="showFilter = true">Tech</option>
+            <option value="etat" @click="showFilter = true">Etat</option>
           </select>
         </div>
         <div id="rightsearch">
@@ -30,7 +29,8 @@
             @click="sort(column.field)"
             @dblclick="delInter(item)">
           {{ column.label }}
-          <button  class="checkbox" v-if="column.field == 'supprimer'" @click="delInter(isChecked)">Supprimer</button>
+          <button class="checkbox" v-if="column.field == 'supprimer'" @click="delInter(isChecked)"><i
+            class="fas fa-trash-alt fa-2x"></i></button>
         </th>
         </thead>
         <tbody>
@@ -45,8 +45,7 @@
               :key="index2"
               @click="setActive(row, index); editValue(index2, index)">
             <div v-show="!row.edit || row.edit && editColumn != index2">
-            {{ cell }}
-
+              {{cell}}
             </div>
             <input id="editor" type="text" v-show="row.edit && editColumn == index2" v-model="sortedRows[index][index2]"
                    @blur="updateValue(this, index)"
@@ -54,7 +53,7 @@
                    v-on:keyup.27="cancelValue(this, row, index2, counterEchap++)"/>
           </td>
           <td>
-            <span><button type="button" class="btn" @click="showEdit(row)">Editer</button>
+            <span><button type="button" class="btn" @click="showEdit(row)"><i class="fas fa-edit fa-1x"></i></button>
               <edition v-show="isEditVisible" :details="ed" @close="hideEdit"/>
             </span>
 
@@ -63,10 +62,12 @@
         </tbody>
         <tfoot>
         <tr>
-          <th><button type="button" class="floated" @click="showModal">
-            Ajouter
-          </button>
-            <modal v-show="isModalVisible" @close="hideModal"/></th>
+          <th class="btn-center">
+            <button type="button" class="floated" @click="showModal">
+              <i class="fas fa-user-plus"></i>
+            </button>
+            <modal v-show="isModalVisible" @close="hideModal"/>
+          </th>
           <th colspan="8">
             <div class="ui right floated small primary labeled icon button">
 
