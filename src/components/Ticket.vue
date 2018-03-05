@@ -16,23 +16,26 @@
         </thead>
         <tbody>
         <tr v-for="(row, index) in sortedRows" :key="index">
-          <td v-for="col in row" :key="col">
-            {{ col }}
-          </td>
-        </tr>
+            <td v-for="col in row" :key="col"  @dblclick="editedTodo = (i+'_'+j);editedValue=col">
+              <label v-show = "editedTodo != (i+'_'+j)"> {{col}} </label>
+              <input  v-if = "editedTodo == (i+'_'+j)" v-model = "editedValue" v-focus="true"
+                      v-on:blur= "edit(i,j); $emit('update')"
+                      @keyup.enter = "edit(i,j); $emit('update')">
+            </td>
+         </tr>
         </tbody>
       </table>
       <p>
         <button @click="prev">Previous page</button>
         <button @click="next">Next page</button>
       </p>
-
     </div>
   </div>
-
 </template>
 
 <script>
+/* eslint-disable vue/no-side-effects-in-computed-properties */
+
 var list = [
   {
     ticket: 1,
@@ -84,7 +87,7 @@ var headers = [
 
 export default {
   name: 'Ticket',
-  data () {
+  data: function () {
     return {
       msg: 'Ticketing App',
       columns: headers,
@@ -92,7 +95,9 @@ export default {
       currentSort: list.ticket,
       currentSortWay: 'asc',
       page: 1,
-      pageSize: 5
+      pageSize: 5,
+      editedTodo: null,
+      editedValue: null
     }
   },
   methods: {
@@ -107,6 +112,11 @@ export default {
     },
     prev: function () {
       if (this.page > 1) this.page--
+    },
+    edit: function (i, j) {
+      this.editedTodo = ''
+      console.log(this.editedValue)
+      this.todos[i]['values'][j] = this.editedValue
     }
   },
   computed: {
