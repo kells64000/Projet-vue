@@ -56,7 +56,6 @@
             <span v-else v-show="showDetail==true">
             {{ cell }}
             </span>
-            <!--{{ index2 !== 'detail' ? cell : ''}}-->
           </td>
         </tr>
         </tbody>
@@ -75,8 +74,8 @@ import modal from './Modal'
 import { mapActions } from 'vuex'
 
 var list = [
-  {ticket: 2, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
-  {ticket: 1, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation to try new things et to say bla bla bla bla'},
+  {ticket: 1, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 2, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation to try new things et to say bla bla bla bla'},
   {ticket: 3, etat: 'open', tech: 'Omer', date: '24-11-2017', demandeur: 'Marie', objet: 'résumé', detail: 'detail operation'},
   {ticket: 4, etat: 'open', tech: 'Bart', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
   {ticket: 5, etat: 'open', tech: 'Maggie', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
