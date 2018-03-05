@@ -37,6 +37,7 @@
             @click="sort(column.field)"
             @dblclick="delInter(item)">
           {{ column.label }}
+          <button  v-if="column.field == 'supprimer'" @click="delInter(isChecked)">Supprimer</button>
         </th>
         </thead>
         <tbody>
@@ -44,22 +45,17 @@
             :key="index"
             :class="{active: (index == rowActive && rowActive !== '' ? isActive = true : isActive = false )}">
           <td>
-            <span><input type="checkbox" />
-            </span></td>
+            <span><input type="checkbox" v-model="isChecked" :value="row.ticket"/>
+            </span>
+          </td>
           <td v-for="(cell, index2) in row"
               :key="index2"
-              @click="setActive(row, index)"
-              @dblclick="editedTodo = (i+'_'+j);editedValue=cell">
-            <span v-if="index2 !== 'detail' || index == rowActive && rowActive !== ''" v-show="showDetail==false && editedTodo != (i+j)">
-            {{ cell }}
-            </span>
-            <input  v-if = "editedTodo == (i+'_'+j) && editedValue == cell  && isActive == true" v-model = "editedValue" v-focus = true
-                    v-on:blur= "edit(i,j); $emit('update')"
-                    @keyup.enter = "edit(i,j); $emit('update')">
-            <span v-else v-show="showDetail==true">
-            {{ cell }}
-            </span>
-            <!--{{ index2 !== 'detail' ? cell : ''}}-->
+              @dblclick="editValue(index)">
+            <!--{{row}}-->
+             <span v-show="!row.edit">
+               {{ cell }}
+             </span>
+            <input type="text" v-show="row.edit" />
           </td>
         </tr>
         </tbody>
@@ -76,10 +72,11 @@
 
 <script>
 import modal from './Modal'
+import { mapActions } from 'vuex'
 
 var list = [
   {ticket: 2, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
-  {ticket: 1, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation to try new things et to say bla bla bla bla'},
+  {ticket: 1, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation'},
   {ticket: 3, etat: 'open', tech: 'Omer', date: '24-11-2017', demandeur: 'Marie', objet: 'résumé', detail: 'detail operation'},
   {ticket: 4, etat: 'open', tech: 'Bart', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
   {ticket: 5, etat: 'open', tech: 'Maggie', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
@@ -91,7 +88,7 @@ var list = [
 ]
 var headers = [
   {
-    label: 'Supprimer',
+    label: '',
     field: 'supprimer'
   },
   {
@@ -150,10 +147,12 @@ export default {
       rowActive: '',
       isModalVisible: false,
       editedTodo: null,
-      editedValue: ''
+      editedValue: '',
+      isChecked: []
     }
   },
   methods: {
+    ...mapActions(['delInter', 'editValue']),
     sort: function (s) {
       if (s === this.currentSort) {
         this.currentSortWay = this.currentSortWay === 'asc' ? 'desc' : 'asc'
@@ -178,6 +177,10 @@ export default {
     },
     hideModal: function () {
       this.isModalVisible = false
+    },
+    editValue: function (index) {
+      this.rows[index].edit = true
+      console.log('test')
     }
   },
   computed: {
