@@ -5,7 +5,7 @@
            role="dialog">
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            Nouvelle intervention
+            Edition
             <button type="button" class="btn-close" @click="close">
               x
             </button>
@@ -31,7 +31,7 @@
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button"  @click="addInter(item)">
+            <button type="button">
               Valider
             </button>
           </slot>
@@ -49,6 +49,7 @@ let etat = 'open'
 let date = new Date()
 
 export default {
+  props: ['details'],
   data () {
     return {
       item: {
@@ -59,61 +60,25 @@ export default {
         demandeur: '',
         objet: '',
         detail: ''
-      }
+      },
+      row: ''
     }
   },
-  name: 'modal',
+  watch: {
+    details () {
+      this.item = this.details
+      console.log(this.details)
+    }
+  },
   methods: {
+    ...mapActions(['editInter']),
     close () {
       this.$emit('close')
-    },
-    ...mapActions(['addInter'])
-  },
-  computed: {
-    items () {
-      return this.$store.state.items
-
-  <div class="modal-backdrop">
-    <div class="modal">
-      <slot name="header">
-      </slot>
-
-      <slot name="body">
-      </slot>
-
-      <slot name="footer">
-      </slot>
-    </div>
-  </div>
-</template>
-
-<script>
-
-export default {
-  name: 'Modal',
-  components: {
-    Modal
-  },
-  data () {
-    return {
-      isModalVisible: false
-    }
-  },
-  methods: {
-    showModal () {
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
-
     }
   }
 }
 </script>
 
-
 <style scoped>
 
 </style>
-
-

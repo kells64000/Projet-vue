@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: 10%;
   height: 100%;
   padding: 0px;
   overflow-x: hidden;
@@ -21,6 +21,17 @@ body {
   line-height: 1.4285em;
   color: rgba(0, 0, 0, 0.87);
   font-smoothing: antialiased;
+}
+
+
+label {
+  display: block;
+  margin: 0em 0em 0.28571429rem 0em;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 0.92857143em;
+  font-weight: bold;
+  text-transform: none;
+  text-align: left;
 }
 
 /* Border-Box */
@@ -75,7 +86,7 @@ table {
   border-collapse: separate;
   border-spacing: 0px;
 }
-able:first-child {
+table:first-child {
   margin-top: 0em;
 }
 table:last-child {
@@ -94,7 +105,7 @@ table thead {
 }
 table thead th {
   cursor: auto;
-  background: #0A6E8F;
+  background: #cddfef;
   text-align: inherit;
   color: #FFF;
   padding: 0.92857143em 0.78571429em;
@@ -125,12 +136,74 @@ table tr td {
 table tr:first-child td {
   border-top: none;
 }
+table tr:hover td {
+  background-color: #FBE7E7;
+}
+
+table tr.active td {
+  -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
+}
+
+table tfoot:not(.full-width) th:first-child {
+  pointer-events: none;
+  background: transparent;
+  font-weight: rgba(0, 0, 0, 0.4);
+  color: normal;
+  -webkit-box-shadow: 1px 1px 0px 1px #FFFFFF;
+  box-shadow: 1px 1px 0px 1px #FFFFFF;
+}
+
+table tfoot {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+table tfoot th {
+  cursor: auto;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  background: #F9FAFB;
+  text-align: inherit;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 0.78571429em 0.78571429em;
+  vertical-align: middle;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: none;
+}
+table tfoot tr > th:first-child {
+  border-left: none;
+}
+table tfoot tr:first-child > th:first-child {
+  border-radius: 0em 0em 0em 0.28571429rem;
+}
+table tfoot tr:first-child > th:last-child {
+  border-radius: 0em 0em 0.28571429rem 0em;
+}
+table tfoot tr:first-child > th:only-child {
+  border-radius: 0em 0em 0.28571429rem 0.28571429rem;
+}
+
+
 
 /* Table Cells */
 table td {
   padding: 0.78571429em 0.78571429em;
   text-align: inherit;
 }
+
+celled.table tr th,
+celled.table tr td {
+  border-left: 1px solid rgba(34, 36, 38, 0.1);
+}
+celled.table tr th:first-child,
+celled.table tr td:first-child {
+  border-left: none;
+}
+celled.table tr th:first-child,
+celled.table tr td:first-child {
+  border-left: none;
+}
+
 /*--------------
      Active
 ---------------*/
@@ -209,6 +282,8 @@ button {
   will-change: '';
   -webkit-tap-highlight-color: transparent;
 }
+
+
 button:hover {
   background-color: #CACBCD;
   background-image: none;
@@ -216,6 +291,89 @@ button:hover {
   box-shadow: 0px 0px 0px 1px transparent inset, 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
   color: rgba(0, 0, 0, 0.8);
 }
+
+checkbox {
+  position: relative;
+  display: inline-block;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  outline: none;
+  vertical-align: baseline;
+  font-style: normal;
+  min-height: 17px;
+  font-size: 1rem;
+  line-height: 17px;
+  min-width: 17px;
+}
+
+checkbox input[type="checkbox"] {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0 !important;
+  outline: none;
+  z-index: 3;
+  width: 17px;
+  height: 17px;
+}
+
+checkbox label:before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 17px;
+  height: 17px;
+  content: '';
+  background: #FFFFFF;
+  border-radius: 0.21428571rem;
+  -webkit-transition: border 0.1s ease, opacity 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
+  transition: border 0.1s ease, opacity 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
+  transition: border 0.1s ease, opacity 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
+  transition: border 0.1s ease, opacity 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
+  border: 1px solid #D4D4D5;
+}
+
+checkbox label:after {
+  position: absolute;
+  font-size: 14px;
+  top: 0px;
+  left: 0px;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  opacity: 0;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: border 0.1s ease, opacity 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
+  transition: border 0.1s ease, opacity 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
+  transition: border 0.1s ease, opacity 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
+  transition: border 0.1s ease, opacity 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
+}
+
+select {
+  display: block;
+  height: auto;
+  width: 40%;
+  background: #FFFFFF;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
+  -webkit-box-shadow: 0em 0em 0em 0em transparent inset;
+  box-shadow: 0em 0em 0em 0em transparent inset;
+  padding: 0.62em 1em;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: color 0.1s ease, border-color 0.1s ease;
+  transition: color 0.1s ease, border-color 0.1s ease;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+}
+
+#leftsearch {
+  float: left;
+}
+
+#rightsearch {
+  float: right;
 
 .btn-add{
   background-color: #FFF;
@@ -301,4 +459,5 @@ button:hover {
   background: #4AAE9B;
   border: 1px solid #4AAE9B;
   border-radius: 2px;
+
 }
