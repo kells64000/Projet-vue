@@ -33,7 +33,8 @@
         <th v-for="column in columns"
             :title="column.label"
             :key="column.field"
-            @click="sort(column.field)">
+            @click="sort(column.field)"
+            @dblclick="delInter(item)">
           {{ column.label }}
         </th>
         </thead>
@@ -42,7 +43,7 @@
             :key="index"
             :class="{active: (index == rowActive && rowActive !== '' ? isActive = true : isActive = false )}">
           <td>
-            <span><button @click="delInter(item)">x</button>
+            <span><input type="checkbox" />
             </span></td>
           <td v-for="(cell, index2) in row"
               :key="index2"
