@@ -24,6 +24,10 @@ const mutations = {
       inter
     )
   },
+  [types.editValue] (data) {
+    let oldData = data
+    console.log(oldData)
+  },
   [types.delInter] (state, payload) {
     console.log(state.items.length)
     for (let i = 0; i < payload.length; i++) {
