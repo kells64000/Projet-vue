@@ -17,6 +17,7 @@ export const delInter = ({commit}, payload) => {
   commit(types.delInter, payload)
 }
 
-export const editValue = ({commit}, payload) => {
-  commit(types.editValue, payload)
+export const editInter = ({commit}, payload) => {
+  commit(types.editInter, payload)
+
 }

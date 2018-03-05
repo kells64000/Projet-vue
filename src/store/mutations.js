@@ -4,4 +4,5 @@ export const addInter = 'ADD_INTER'
 
 export const delInter = 'DEL_INTER'
 
-export const editValue = 'EDIT_VALUE'
+export const editInter = 'EDIT_INTER'
+

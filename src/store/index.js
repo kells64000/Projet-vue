@@ -29,12 +29,16 @@ const mutations = {
     console.log(oldData)
   },
   [types.delInter] (state, payload) {
-    let delRow = payload
-    for (let i = 0; i < state.items.length; i++) {
-      if (delRow.indexOf(state.items[i].ticket) > -1) {
-        state.items.splice(i, 1)
+    console.log(state.items.length)
+    for (let i = 0; i < payload.length; i++) {
+      for (let j = 0; j < state.items.length; j++) {
+        if (payload[i] === state.items[j].ticket) {
+          state.items.splice(j, 1)
+        }
       }
     }
+  },
+  [types.editInter] (state, payload) {
   }
 }
 

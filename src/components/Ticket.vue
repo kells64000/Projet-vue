@@ -3,12 +3,6 @@
     <h2>{{msg}}</h2>
     <tr>
       <div>
-        <button type="button" class="btn" @click="showModal">
-          Ajouter
-        </button>
-        <modal v-show="isModalVisible" @close="hideModal"/>
-      </div>
-      <div>
         <div id="leftsearch">
           <label>Filter by :</label>
           <select v-model="colonne">
@@ -28,7 +22,7 @@
       </div>
     </tr>
     <div>
-      <table class="table">
+      <table class="celled table">
         <thead>
         <th v-for="column in columns"
             :title="column.label"
@@ -36,7 +30,7 @@
             @click="sort(column.field)"
             @dblclick="delInter(item)">
           {{ column.label }}
-          <button  v-if="column.field == 'supprimer'" @click="delInter(isChecked)">Supprimer</button>
+          <button  class="checkbox" v-if="column.field == 'supprimer'" @click="delInter(isChecked)">Supprimer</button>
         </th>
         </thead>
         <tbody>
@@ -52,25 +46,57 @@
               @click="setActive(row, index); editValue(index2, index)">
             <div v-show="!row.edit || row.edit && editColumn != index2">
             {{ cell }}
+
             </div>
             <input id="editor" type="text" v-show="row.edit && editColumn == index2" v-model="sortedRows[index][index2]"
                    @blur="updateValue(this, index)"
                    @keyup.enter="updateValue(this, index)"
                    v-on:keyup.27="cancelValue(this, row, index2, counterEchap++)"/>
+
+            </span>
+          </td>
+          <td>
+            <span><button type="button" class="btn" @click="showEdit(row)">Editer</button>
+              <edition v-show="isEditVisible" :details="ed" @close="hideEdit"/>
+            </span>
+
           </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <th><button type="button" class="floated" @click="showModal">
+            Ajouter
+          </button>
+            <modal v-show="isModalVisible" @close="hideModal"/></th>
+          <th colspan="8">
+            <div class="ui right floated small primary labeled icon button">
+
+            </div>
+            <div class="ui small  button">
+
+            </div>
+            <div class="ui small  button">
+
+            </div>
+          </th>
+        </tr>
+        </tfoot>
       </table>
       <p>
         <button @click="prev">Previous page</button>
         <button @click="next">Next page</button>
       </p>
+
     </div>
   </div>
 
+      </div>
+  </div>
 </template>
 
 <script>
+
   import modal from './Modal'
   import { mapActions } from 'vuex'
 
@@ -90,6 +116,108 @@
     {
       label: '',
       field: 'supprimer'
+
+/* eslint-disable vue/no-side-effects-in-computed-properties */
+
+import modal from './Modal'
+import edition from './Edition'
+
+import { mapActions } from 'vuex'
+
+var list = [
+  {ticket: 1, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 2, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation'},
+  {ticket: 3, etat: 'open', tech: 'Omer', date: '24-11-2017', demandeur: 'Marie', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 4, etat: 'open', tech: 'Bart', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 5, etat: 'open', tech: 'Maggie', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 6, etat: 'open', tech: 'Casimir', date: '24-11-2017', demandeur: 'Marie', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 7, etat: 'open', tech: 'Casimir', date: '24-11-2017', demandeur: 'Tom', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 8, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 9, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
+  {ticket: 10, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Tom', objet: 'résumé', detail: 'detail operation'}
+]
+
+var headers = [
+  {
+    label: '',
+    field: 'supprimer'
+  },
+  {
+    label: 'Ticket',
+    field: 'ticket',
+    type: 'number'
+
+  },
+  {
+    label: 'Etat',
+    field: 'etat',
+    type: 'checkbox'
+  },
+  {
+    label: 'Affecté',
+    field: 'tech'
+  },
+  {
+    label: 'Date',
+    field: 'date',
+    type: 'date',
+    inputFormat: 'DDMMYYYY'
+  },
+  {
+    label: 'Demandeur',
+    field: 'demandeur'
+  },
+  {
+    label: 'Objet',
+    field: 'objet'
+  },
+  {
+    label: 'Detail',
+    field: 'detail',
+
+    showDetail: false
+  },
+  {
+    label: 'Edition',
+    field: 'edition'
+  }
+]
+
+export default {
+
+  components: {
+    modal,
+    edition
+  },
+
+  data () {
+    return {
+      msg: 'Ticketing App',
+      columns: headers,
+      rows: list,
+      currentSort: list.ticket,
+      currentSortWay: 'asc',
+      page: 1,
+      pageSize: 5,
+      rechercher: '',
+      colonne: '',
+      showFilter: false,
+      showDetail: false,
+      isActive: false,
+      rowActive: '',
+      isModalVisible: false,
+      isEditVisible: false,
+      isChecked: [],
+      ed: ''
+
+    }
+  },
+  methods: {
+    sort: function (s) {
+      if (s === this.currentSort) {
+        this.currentSortWay = this.currentSortWay === 'asc' ? 'desc' : 'asc'
+      }
+      this.currentSort = s
     },
     {
       label: 'Ticket',
@@ -115,6 +243,7 @@
       label: 'Demandeur',
       field: 'demandeur'
     },
+
     {
       label: 'Objet',
       field: 'objet'
@@ -162,6 +291,24 @@
             el.focus()
           },1000
           )
+    showEdit: function (e) {
+      this.isEditVisible = true
+      this.ed = e
+    },
+    hideEdit: function () {
+      this.isEditVisible = false
+    },
+    ...mapActions(['delInter'])
+  },
+
+  computed: {
+    sortedRows: function () {
+      var self = this
+      return self.filteredRows.sort((a, b) => {
+        let way = 1
+        if (this.currentSortWay === 'desc') way = -1
+        if (a[this.currentSort] < b[this.currentSort]) {
+          return -1 * way
         }
       }
     },*/
@@ -266,5 +413,20 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
+
+.floated {
+  float: left;
+  margin-right: 0em;
+  margin-left: 0.25em;
+  background-color: #2185D0;
+  color: #FFFFFF;
+  text-shadow: none;
+  background-image: none;
+  -webkit-box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+  box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+}
+
 </style>
+
