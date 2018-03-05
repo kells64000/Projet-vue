@@ -53,10 +53,10 @@
             <div v-show="!row.edit || row.edit && editColumn != index2">
             {{ cell }}
             </div>
-            <input type="text" v-show="row.edit && editColumn == index2" v-model="sortedRows[index][index2]"
+            <input id="editor" type="text" v-show="row.edit && editColumn == index2" v-model="sortedRows[index][index2]"
                    @blur="updateValue(this, index)"
                    @keyup.enter="updateValue(this, index)"
-                   v-on:keyup.27="cancelValue(row, index)"/>
+                   v-on:keyup.27="cancelValue(this, row, index2, counterEchap++)"/>
           </td>
         </tr>
         </tbody>
@@ -147,7 +147,9 @@
         isModalVisible: false,
         isChecked: [],
         editColumn: '',
-        tmpValue: ''
+        tmpValue: '',
+        counterEchap: 0,
+        imput: ''
       }
     },
 /*    directives: {
@@ -199,12 +201,19 @@
         this.rows[index].edit = false
         this.$forceUpdate()
       },
-      cancelValue: function (row, index) {
-        let oldData = this.tmpValue
-        this.rows[index].value = this.tmpValue
-        console.log(this.rows[index].value)
-        // this.rows[index].edit = false
-        // this.$forceUpdate()
+      cancelValue: function (data, index, index2, counterEchap) {
+/*        let tmp = this.tmpValue
+        let msgDepart = ''
+
+        if (counterEchap == 0) {
+          msgDepart = tmp
+          console.log(msgDepart)
+        }else {
+          document.getElementById('editor').innerHTML = msgDepart;
+        }*/
+
+        this.rows[index].edit = false
+        this.$forceUpdate()
       }
     },
     computed: {
