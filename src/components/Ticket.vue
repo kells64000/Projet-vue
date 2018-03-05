@@ -213,7 +213,9 @@ export default {
     },
     setActive: function (row, index) {
       this.rowActive = index
-      if (row && this.rowActive !== '') { this.isActive = !this.isActive }
+      if (row && this.rowActive !== '') {
+        this.isActive = !this.isActive
+      }
     },
     showModal: function () {
       this.isModalVisible = true
@@ -234,19 +236,19 @@ export default {
     cancelValue: function (data, index, index2, counterEchap) {
       this.rows[index].edit = false
       this.$forceUpdate()
-
-      /*        let tmp = this.tmpValue
-              let msgDepart = ''
-
-              if (counterEchap == 0) {
-                msgDepart = tmp
-                console.log(msgDepart)
-              }else {
-                document.getElementById('editor').innerHTML = msgDepart;
-              }*/
-    }
-
     },
+
+/* let tmp = this.tmpValue
+   let msgDepart = ''
+
+    if (counterEchap == 0) {
+      msgDepart = tmp
+      console.log(msgDepart)
+    }else {
+      document.getElementById('editor').innerHTML = msgDepart;
+    }
+*/
+  },
   computed: {
     sortedRows: function () {
       var self = this
