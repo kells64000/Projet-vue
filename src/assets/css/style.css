@@ -279,7 +279,6 @@ button {
   transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, background 0.1s ease, -webkit-box-shadow 0.1s ease;
   transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
   transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease, -webkit-box-shadow 0.1s ease;
-  will-change: '';
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -374,6 +373,7 @@ select {
 
 #rightsearch {
   float: right;
+}
 
 .btn-add{
   background-color: #FFF;

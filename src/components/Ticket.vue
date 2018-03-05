@@ -89,6 +89,8 @@
 
 <script>
 
+/* eslint-disable vue/no-side-effects-in-computed-properties */
+
 import modal from './Modal'
 import edition from './Edition'
 
@@ -96,7 +98,7 @@ import { mapActions } from 'vuex'
 
 var list = [
   {ticket: 1, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
-  {ticket: 2, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation to try new things et to say bla bla bla bla'},
+  {ticket: 2, etat: 'open', tech: 'Paul', date: '24-11-2017', demandeur: 'Tom', objet: 'objet', detail: 'detail operation'},
   {ticket: 3, etat: 'open', tech: 'Omer', date: '24-11-2017', demandeur: 'Marie', objet: 'résumé', detail: 'detail operation'},
   {ticket: 4, etat: 'open', tech: 'Bart', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
   {ticket: 5, etat: 'open', tech: 'Maggie', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
@@ -105,28 +107,8 @@ var list = [
   {ticket: 8, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
   {ticket: 9, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Chris', objet: 'résumé', detail: 'detail operation'},
   {ticket: 10, etat: 'open', tech: '--', date: '24-11-2017', demandeur: 'Tom', objet: 'résumé', detail: 'detail operation'}
-=======
-/* eslint-disable vue/no-side-effects-in-computed-properties */
-
-var list = [
-  {
-    ticket: 1,
-    date: '24-11-2017',
-    demandeur: 'Tom',
-    objet: 'objet-1',
-    detail: 'detail operation',
-    crud: ''
-  },
-  {ticket: 2, date: '24-11-2017', demandeur: 'Jean', objet: 'objet-2', detail: 'detail operation', crud: ''},
-  {ticket: 3, date: '25-11-2017', demandeur: 'Marie', objet: 'objet-3', detail: 'detail operation', crud: ''},
-  {ticket: 4, date: '26-11-2017', demandeur: 'Chris', objet: 'objet-4', detail: 'detail operation', crud: ''},
-  {ticket: 5, date: '27-11-2017', demandeur: 'Jean', objet: 'objet-5', detail: 'detail operation', crud: ''},
-  {ticket: 6, date: '28-11-2017', demandeur: 'Marie', objet: 'objet-6', detail: 'detail operation', crud: ''},
-  {ticket: 7, date: '29-11-2017', demandeur: 'Tom', objet: 'objet-7', detail: 'detail operation', crud: ''},
-  {ticket: 8, date: '30-11-2017', demandeur: 'Chris', objet: 'objet-8', detail: 'detail operation', crud: ''},
-  {ticket: 9, date: '1-12-2017', demandeur: 'Chris', objet: 'objet-9', detail: 'detail operation', crud: ''},
-  {ticket: 10, date: '2-12-2017', demandeur: 'Tom', objet: 'objet-10', detail: 'detail operation', crud: ''}
 ]
+
 var headers = [
   {
     label: '',
