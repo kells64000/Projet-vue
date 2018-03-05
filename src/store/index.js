@@ -19,17 +19,18 @@ const mutations = {
   },
   [types.addInter] (state, payload) {
     payload.ticket = state.lastTicket++
-    console.log(Object.values(payload))
     let inter = payload
     state.items.push(
       inter
     )
   },
   [types.delInter] (state, payload) {
-    let inter = payload
-    state.items.pop(
-      inter
-    )
+    let delRow = payload
+    for (let i = 0; i < state.items.length; i++) {
+      if (delRow.indexOf(state.items[i].ticket) > -1) {
+        state.items.splice(i, 1)
+      }
+    }
   }
 }
 

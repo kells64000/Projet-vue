@@ -36,6 +36,7 @@
             @click="sort(column.field)"
             @dblclick="delInter(item)">
           {{ column.label }}
+          <button  v-if="column.field == 'supprimer'" @click="delInter(isChecked)">Supprimer</button>
         </th>
         </thead>
         <tbody>
@@ -43,8 +44,9 @@
             :key="index"
             :class="{active: (index == rowActive && rowActive !== '' ? isActive = true : isActive = false )}">
           <td>
-            <span><input type="checkbox" />
-            </span></td>
+            <span><input type="checkbox" v-model="isChecked" :value="row.ticket"/>
+            </span>
+          </td>
           <td v-for="(cell, index2) in row"
               :key="index2"
               @click="setActive(row, index)">
@@ -70,6 +72,7 @@
 
 <script>
 import modal from './Modal'
+import { mapActions } from 'vuex'
 
 var list = [
   {ticket: 2, etat: 'open', tech: 'Phil', date: '24-11-2017', demandeur: 'Jean', objet: 'résumé', detail: 'detail operation'},
@@ -85,7 +88,7 @@ var list = [
 ]
 var headers = [
   {
-    label: 'Supprimer',
+    label: '',
     field: 'supprimer'
   },
   {
@@ -142,7 +145,8 @@ export default {
       showDetail: false,
       isActive: false,
       rowActive: '',
-      isModalVisible: false
+      isModalVisible: false,
+      isChecked: []
     }
   },
   methods: {
@@ -170,7 +174,8 @@ export default {
     },
     hideModal: function () {
       this.isModalVisible = false
-    }
+    },
+    ...mapActions(['delInter'])
   },
 
   computed: {
