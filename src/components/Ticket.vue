@@ -57,6 +57,11 @@
             {{ cell }}
             </span>
           </td>
+          <td>
+            <span><button type="button" class="btn" @click="showEdit(row)">Editer</button>
+              <edition v-show="isEditVisible" :details="ed" @close="hideEdit"/>
+            </span>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -71,6 +76,8 @@
 
 <script>
 import modal from './Modal'
+import edition from './Edition'
+
 import { mapActions } from 'vuex'
 
 var list = [
@@ -122,12 +129,17 @@ var headers = [
     label: 'Detail',
     field: 'detail',
     showDetail: false
+  },
+  {
+    label: 'Edition',
+    field: 'edition'
   }
 ]
 
 export default {
   components: {
-    modal
+    modal,
+    edition
   },
   data () {
     return {
@@ -145,7 +157,10 @@ export default {
       isActive: false,
       rowActive: '',
       isModalVisible: false,
-      isChecked: []
+      isEditVisible: false,
+      isChecked: [],
+      ed: ''
+
     }
   },
   methods: {
@@ -173,6 +188,13 @@ export default {
     },
     hideModal: function () {
       this.isModalVisible = false
+    },
+    showEdit: function (e) {
+      this.isEditVisible = true
+      this.ed = e
+    },
+    hideEdit: function () {
+      this.isEditVisible = false
     },
     ...mapActions(['delInter'])
   },
