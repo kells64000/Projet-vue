@@ -5,7 +5,7 @@
            role="dialog">
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            Edition{{details}}
+            Edition
             <button type="button" class="btn-close" @click="close">
               x
             </button>

@@ -3,12 +3,6 @@
     <h2>{{msg}}</h2>
     <tr>
       <div>
-        <button type="button" class="btn" @click="showModal">
-          Ajouter
-        </button>
-        <modal v-show="isModalVisible" @close="hideModal"/>
-      </div>
-      <div>
         <div id="leftsearch">
           <label>Filter by :</label>
             <select v-model="colonne">
@@ -28,7 +22,7 @@
       </div>
     </tr>
     <div>
-      <table class="table">
+      <table class="celled table">
         <thead>
         <th v-for="column in columns"
             :title="column.label"
@@ -36,7 +30,7 @@
             @click="sort(column.field)"
             @dblclick="delInter(item)">
           {{ column.label }}
-          <button  v-if="column.field == 'supprimer'" @click="delInter(isChecked)">Supprimer</button>
+          <button  class="checkbox" v-if="column.field == 'supprimer'" @click="delInter(isChecked)">Supprimer</button>
         </th>
         </thead>
         <tbody>
@@ -64,6 +58,25 @@
           </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <th><button type="button" class="floated" @click="showModal">
+            Ajouter
+          </button>
+            <modal v-show="isModalVisible" @close="hideModal"/></th>
+          <th colspan="8">
+            <div class="ui right floated small primary labeled icon button">
+
+            </div>
+            <div class="ui small  button">
+
+            </div>
+            <div class="ui small  button">
+
+            </div>
+          </th>
+        </tr>
+        </tfoot>
       </table>
       <p>
         <button @click="prev">Previous page</button>
@@ -250,5 +263,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.floated {
+  float: left;
+  margin-right: 0em;
+  margin-left: 0.25em;
+  background-color: #2185D0;
+  color: #FFFFFF;
+  text-shadow: none;
+  background-image: none;
+  -webkit-box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+  box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+}
 
 </style>
