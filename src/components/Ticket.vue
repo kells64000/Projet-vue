@@ -43,10 +43,16 @@
             </span>
           </td>
           <td v-for="(cell, index2) in row"
+              v-if="index2 != 'edit'"
               :key="index2"
+              @click="setActive(row,index)"
               @dblclick="setActive(row, index); editValue(index2, index)">
-            <div v-show="!row.edit || row.edit && editColumn != index2">
+            <div  v-show="!row.edit || row.edit && editColumn != index2 && showDetail==false"
+                  v-if="index2 !== 'detail' || index == rowActive && rowActive !== ''">
               {{cell}}
+            </div>
+            <div v-else v-show="showDetail==true">
+              {{ cell }}
             </div>
             <input id="editor" type="text"
                    v-show="row.edit && editColumn == index2"
@@ -59,7 +65,6 @@
             <span><button type="button" class="btn" @click="showEdit(row)"><i class="fas fa-edit fa-1x"></i></button>
               <edition v-show="isEditVisible" :details="ed" @close="hideEdit"/>
             </span>
-
           </td>
         </tr>
         </tbody>
