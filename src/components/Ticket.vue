@@ -29,8 +29,9 @@
             @click="sort(column.field)"
             @dblclick="delInter(item)">
           {{ column.label }}
-          <button class="checkbox" v-if="column.field == 'supprimer'" @click="delInter(isChecked)"><i
-            class="fas fa-trash-alt fa-2x"></i></button>
+          <button class="checkbox" v-if="column.field == 'supprimer'" @click="delInter(isChecked)">
+            <i class="fas fa-trash-alt fa-2x"></i>
+          </button>
         </th>
         </thead>
         <tbody>
@@ -179,6 +180,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['delInter']),
     sort: function (s) {
       if (s === this.currentSort) {
         this.currentSortWay = this.currentSortWay === 'asc' ? 'desc' : 'asc'

@@ -18,7 +18,9 @@
                 <input type="text" v-model="item.demandeur"/>
               </label>
               <label>Resumé:
+                <p>
                 <input type="text" v-model="item.objet"/>
+                </p>
               </label>
               <label>Description:
                 <input type="text" v-model="item.detail"/>
