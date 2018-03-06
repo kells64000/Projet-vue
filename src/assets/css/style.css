@@ -74,7 +74,13 @@ a {
   margin-bottom: 30px;
 }
 
+.table-center{
+  display: flex;
+  justify-content: center;
+}
+
 table {
+  width: 80%;
   background: #FFFFFF;
   margin: 1em 0em;
   border: 1px solid rgba(34, 36, 38, 0.15);
@@ -373,6 +379,7 @@ select {
 #leftsearch {
   float: left;
   padding-bottom: 30px;
+  padding-left: 150px;
 }
 
 #rightsearch {
@@ -382,7 +389,8 @@ select {
 
 .btn-center{
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  padding-left: 190px;
 }
 
 .modal-backdrop {
