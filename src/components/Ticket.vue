@@ -59,25 +59,27 @@
         </tr>
         </tbody>
         <tfoot>
-        <tr>
-          <th><button type="button" class="floated" @click="showModal">
-            Ajouter
-          </button>
-            <modal v-show="isModalVisible" @close="hideModal"/></th>
-          <th colspan="8">
-            <div class="ui right floated small primary labeled icon button">
-
-            </div>
-            <div class="ui small  button">
-
-            </div>
-            <div class="ui small  button">
-
-            </div>
-          </th>
-        </tr>
-        </tfoot>
+          </tfoot>
       </table>
+          <tr>
+            <th>
+              <button type="button" class="floated" @click="showModal">
+              Ajouter
+            </button>
+              <modal v-show="isModalVisible" @close="hideModal"/>
+            </th>
+            <th colspan="8">
+              <div class="ui right floated small primary labeled icon button">
+
+              </div>
+              <div class="ui small  button">
+
+              </div>
+              <div class="ui small  button">
+
+              </div>
+            </th>
+          </tr>
       <p>
         <button @click="prev">Previous page</button>
         <button @click="next">Next page</button>
@@ -271,8 +273,7 @@ export default {
   color: #FFFFFF;
   text-shadow: none;
   background-image: none;
-  -webkit-box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
-  box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+
 }
 
 </style>

@@ -35,6 +35,9 @@ const mutations = {
     }
   },
   [types.editInter] (state, payload) {
+    payload.ticket = state.lastTicket++
+    let inter = payload
+    state.items.splice(inter, 1, payload)
   }
 }
 
