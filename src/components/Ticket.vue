@@ -20,7 +20,7 @@
         </div>
       </div>
     </tr>
-    <div>
+    <div class="table-center">
       <table class="celled table">
         <thead>
         <th v-for="column in columns"
@@ -50,7 +50,7 @@
             <input id="editor" type="text" v-show="row.edit && editColumn == index2" v-model="sortedRows[index][index2]"
                    @blur="updateValue(this, index)"
                    @keyup.enter="updateValue(this, index)"
-                   v-on:keyup.27="cancelValue(this, row, index2, counterEchap++)"/>
+                   v-on:keyup.27="cancelValue(this, index)"/>
           </td>
           <td>
             <span><button type="button" class="btn" @click="showEdit(row)"><i class="fas fa-edit fa-1x"></i></button>
@@ -60,33 +60,20 @@
           </td>
         </tr>
         </tbody>
-        <tfoot>
-        <tr>
-          <th class="btn-center">
-            <button type="button" class="floated" @click="showModal">
-              <i class="fas fa-user-plus"></i>
-            </button>
-            <modal v-show="isModalVisible" @close="hideModal"/>
-          </th>
-          <th colspan="8">
-            <div class="ui right floated small primary labeled icon button">
-
-            </div>
-            <div class="ui small  button">
-
-            </div>
-            <div class="ui small  button">
-
-            </div>
-          </th>
-        </tr>
-        </tfoot>
       </table>
+    </div>
+        <p class="btn-center">
+          <button type="button" class="floated" @click="showModal">
+            <i class="fas fa-user-plus"></i>
+          </button>
+          <modal v-show="isModalVisible" @close="hideModal"/>
+        </p>
+
+    <div>
       <p>
         <button @click="prev">Previous page</button>
         <button @click="next">Next page</button>
       </p>
-
     </div>
   </div>
 </template>
@@ -234,7 +221,7 @@ export default {
       this.rows[index].edit = false
       this.$forceUpdate()
     },
-    cancelValue: function (data, index, index2, counterEchap) {
+    cancelValue: function (row, index) {
       this.rows[index].edit = false
       this.$forceUpdate()
     },
