@@ -110,7 +110,7 @@ table thead th {
   color: #FFF;
   padding: 0.92857143em 0.78571429em;
   vertical-align: middle !important;
-  font-style: none;
+  /*font-style: none;*/
   font-weight: bold;
   text-transform: none;
   border-bottom: 1px solid rgba(34, 36, 38, 0.1);
@@ -144,15 +144,6 @@ table tr:hover td {
 table tr.active td {
   -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.87) inset;
-}
-
-table tfoot:not(.full-width) th:first-child {
-  pointer-events: none;
-  background: transparent;
-  font-weight: rgba(0, 0, 0, 0.4);
-  color: normal;
-  -webkit-box-shadow: 1px 1px 0px 1px #FFFFFF;
-  box-shadow: 1px 1px 0px 1px #FFFFFF;
 }
 
 table tfoot {
