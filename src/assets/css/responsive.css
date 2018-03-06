@@ -13,7 +13,8 @@
     padding: 0em;
   }
   table:not(.unstackable) thead {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
   table:not(.unstackable) tfoot {
     display: block;
@@ -42,5 +43,13 @@
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
   }
+  
+  #leftsearch{
+    padding-left: 0 !important;
+    padding-top: 10px !important;
+  }
 
+  #righttsearch{
+    padding-top: 10px !important;
+  }
 }
