@@ -43,13 +43,21 @@
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
   }
-  
+
   #leftsearch{
     padding-left: 0 !important;
     padding-top: 10px !important;
+    float: none;
   }
 
-  #righttsearch{
-    padding-top: 10px !important;
+  #rightsearch {
+    float: none;
+    padding-left: 0px !important;
+    padding-bottom: 20px;
+  }
+
+  .btn-center{
+    justify-content: center;
+    padding-left: 0px;
   }
 }
