@@ -67,7 +67,7 @@
     </div>
         <p class="btn-center">
           <button type="button" class="floated" @click="showModal">
-            <i class="fas fa-user-plus"></i>
+            <i class="fas fa-user-plus fa-2x"></i>
           </button>
           <modal v-show="isModalVisible" @close="hideModal"/>
         </p>
