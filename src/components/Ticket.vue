@@ -60,6 +60,7 @@
           </td>
         </tr>
         </tbody>
+
       </table>
     </div>
         <p class="btn-center">
@@ -298,8 +299,7 @@ export default {
   color: #FFFFFF;
   text-shadow: none;
   background-image: none;
-  -webkit-box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
-  box-shadow: 0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+
 }
 
 </style>
