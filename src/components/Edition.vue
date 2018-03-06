@@ -33,9 +33,6 @@
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button">
-              Valider
-            </button>
           </slot>
         </footer>
       </div>
