@@ -90,6 +90,7 @@
 
 import modal from './Modal'
 import edition from './Edition'
+import { focus } from 'vue-focus';
 
 import { mapActions } from 'vuex'
 
@@ -179,7 +180,8 @@ export default {
       isChecked: [],
       ed: '',
       editColumn: '',
-      tmpValue: ''
+      tmpValue: '',
+      focused: false
     }
   },
   methods: {
