@@ -48,7 +48,9 @@
             <div v-show="!row.edit || row.edit && editColumn != index2">
               {{cell}}
             </div>
-            <input id="editor" type="text" v-show="row.edit && editColumn == index2" v-model="sortedRows[index][index2]"
+            <input id="editor" type="text"
+                   v-show="row.edit && editColumn == index2"
+                   v-model="sortedRows[index][index2]"
                    @blur="updateValue(this, index)"
                    @keyup.enter="updateValue(this, index)"
                    v-on:keyup.27="cancelValue(this, index)"/>
@@ -61,7 +63,6 @@
           </td>
         </tr>
         </tbody>
-
       </table>
     </div>
         <p class="btn-center">
@@ -228,17 +229,6 @@ export default {
       this.rows[index].edit = false
       this.$forceUpdate()
     },
-
-/* let tmp = this.tmpValue
-   let msgDepart = ''
-
-    if (counterEchap == 0) {
-      msgDepart = tmp
-      console.log(msgDepart)
-    }else {
-      document.getElementById('editor').innerHTML = msgDepart;
-    }
-*/
   },
   computed: {
     sortedRows: function () {
@@ -292,17 +282,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
-
-.floated {
-  float: left;
-  margin-right: 0em;
-  margin-left: 0.25em;
-  background-color: #2185D0;
-  color: #FFFFFF;
-  text-shadow: none;
-  background-image: none;
-
-}
 
 </style>
 
