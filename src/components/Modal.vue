@@ -39,7 +39,6 @@
       </div>
     </div>
   </transition>
-
 </template>
 
 <script>
@@ -73,6 +72,25 @@ export default {
     items () {
       return this.$store.state.items
     }
+    /*    export default: {
+      name: 'Modal',
+      components: {
+        Modal
+      },
+      data() {
+        return {
+          isModalVisible: false
+        }
+      },
+      methods: {
+        showModal() {
+          this.isModalVisible = true;
+        },
+        closeModal() {
+          this.isModalVisible = false;
+
+}
+}, */
   }
 }
 </script>
