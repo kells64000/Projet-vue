@@ -90,7 +90,6 @@
 
 import modal from './Modal'
 import edition from './Edition'
-import { focus } from 'vue-focus';
 
 import { mapActions } from 'vuex'
 
@@ -232,16 +231,7 @@ export default {
     cancelValue: function (row, index, counter) {
       this.rows[index].edit = false
       this.$forceUpdate()
-/*    let tmp = this.tmpValue
-      let data = ''
-
-      if(counter == 0){
-        data = tmp
-      }else{
-        tmp = data
-        console.log(data)
-      }*/
-    },
+    }
   },
   computed: {
     sortedRows: function () {
@@ -297,4 +287,3 @@ export default {
 <style scoped>
 
 </style>
-
