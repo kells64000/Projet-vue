@@ -44,7 +44,7 @@
           </td>
           <td v-for="(cell, index2) in row"
               :key="index2"
-              @click="setActive(row, index); editValue(index2, index)">
+              @dblclick="setActive(row, index); editValue(index2, index)">
             <div v-show="!row.edit || row.edit && editColumn != index2">
               {{cell}}
             </div>
@@ -53,7 +53,7 @@
                    v-model="sortedRows[index][index2]"
                    @blur="updateValue(this, index)"
                    @keyup.enter="updateValue(this, index)"
-                   v-on:keyup.27="cancelValue(this, index)"/>
+                   v-on:keyup.27="cancelValue(this, index, counter++)"/>
           </td>
           <td>
             <span><button type="button" class="btn" @click="showEdit(row)"><i class="fas fa-edit fa-1x"></i></button>
@@ -174,10 +174,7 @@ export default {
       isChecked: [],
       ed: '',
       editColumn: '',
-      tmpValue: '',
-      counterEchap: 0,
-      imput: ''
-
+      tmpValue: ''
     }
   },
   methods: {
@@ -225,9 +222,18 @@ export default {
       this.rows[index].edit = false
       this.$forceUpdate()
     },
-    cancelValue: function (row, index) {
+    cancelValue: function (row, index, counter) {
       this.rows[index].edit = false
       this.$forceUpdate()
+/*    let tmp = this.tmpValue
+      let data = ''
+
+      if(counter == 0){
+        data = tmp
+      }else{
+        tmp = data
+        console.log(data)
+      }*/
     },
   },
   computed: {
